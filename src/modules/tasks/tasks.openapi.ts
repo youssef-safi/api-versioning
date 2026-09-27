@@ -1,5 +1,10 @@
 import { openApiRegistry } from "#/shared/openapi/openapi.js";
-import { CreateTaskRequestSchema, TaskSchema } from "./tasks.schemas.js";
+import {
+  CreateTaskRequestSchema,
+  TaskParamsSchema,
+  TaskSchema,
+  UpdateTaskRequestSchema,
+} from "./tasks.schemas.js";
 
 openApiRegistry.registerPath({
   method: "post",
@@ -18,10 +23,38 @@ openApiRegistry.registerPath({
   },
   responses: {
     201: {
+      description: "Task created",
       content: {
         "application/json": {
           schema: TaskSchema,
-          description: "Task created",
+        },
+      },
+    },
+  },
+});
+
+openApiRegistry.registerPath({
+  method: "patch",
+  path: "/api/tasks/:id",
+  tags: ["Tasks"],
+  operationId: "Update Task",
+  summary: "Update task",
+  request: {
+    params: TaskParamsSchema,
+    body: {
+      content: {
+        "application/json": {
+          schema: UpdateTaskRequestSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: "Task updated",
+      content: {
+        "application/json": {
+          schema: TaskSchema,
         },
       },
     },

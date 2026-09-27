@@ -5,8 +5,11 @@ import { Config } from "./config.js";
 import { apiRouter } from "./router.js";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import { pinoHttp } from "pino-http";
 
 const app = express();
+
+app.use(pinoHttp());
 
 app.use(cookieParser());
 
