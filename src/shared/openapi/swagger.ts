@@ -5,6 +5,7 @@ import { generateOpenApiDocument } from "./openapi.js";
 
 import "#/modules/employees/employees.openapi.js";
 import "#/modules/departments/departments.openapi.js";
+import "#/modules/tasks/tasks.openapi.js";
 
 export function setupSwaggerAndOpenApi(app: Express) {
   const document = generateOpenApiDocument();

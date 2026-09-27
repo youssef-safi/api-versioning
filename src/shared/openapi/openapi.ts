@@ -30,6 +30,10 @@ export function generateOpenApiDocument() {
         name: "Departments",
         description: "Departments management operations",
       },
+      {
+        name: "Tasks",
+        description: "Tasks management operations",
+      },
     ],
   });
 }
