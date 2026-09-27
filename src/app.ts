@@ -4,6 +4,7 @@ import { errorHandler } from "./middlwares/error-handler.middleware.js";
 import { Config } from "./config.js";
 import { apiRouter } from "./router.js";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
 const app = express();
 
@@ -12,6 +13,20 @@ app.use(cookieParser());
 app.use(
   express.json({
     limit: "1mb",
+  }),
+);
+
+app.use(
+  session({
+    name: Config.SESSION.NAME,
+    secret: Config.SESSION.SECRET,
+    resave: Config.SESSION.RESAVE,
+    saveUninitialized: Config.SESSION.SAVE_UNINITIALIZED,
+    cookie: {
+      secure: Config.SESSION.COOKIE.SECURE,
+      httpOnly: Config.SESSION.COOKIE.HTTP_ONLY,
+      maxAge: Config.SESSION.COOKIE.MaxAGE,
+    },
   }),
 );
 
