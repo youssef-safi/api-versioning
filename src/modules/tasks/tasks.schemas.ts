@@ -1,4 +1,5 @@
 import z from "#/shared/zod-openapi/zod.js";
+import { BaseQuerySchema } from "#/shared/schemas/base-query.schema.js";
 
 // Create Task Request Schema
 
@@ -27,6 +28,12 @@ export const TaskParamsSchema = z.object({
 
 export type TaskParams = z.infer<typeof TaskParamsSchema>;
 
+// Task Query Schema
+
+export const TaskQuerySchema = BaseQuerySchema;
+
+export type TaskQuery = z.infer<typeof TaskQuerySchema>;
+
 // Task Schema
 
 export const TaskSchema = z.object({
@@ -37,3 +44,7 @@ export const TaskSchema = z.object({
 });
 
 export type Task = z.infer<typeof TaskSchema>;
+
+// Task Array Schema
+
+export const TaskArraySchema = z.array(TaskSchema);

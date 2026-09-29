@@ -3,6 +3,7 @@ import type { TasksService } from "./tasks.service.js";
 import type {
   CreateTaskRequest,
   TaskParams,
+  TaskQuery,
   UpdateTaskRequest,
 } from "./tasks.schemas.js";
 import { HttpResponse } from "#/shared/http-response/http-response.js";
@@ -24,6 +25,30 @@ export class TasksController {
 
     const result = await this.tasksService.updateTask(params.id, request);
 
-    return HttpResponse.created(res, result);
+    return HttpResponse.ok(res, result);
+  };
+
+  deleteTask = async (req: Request, res: Response) => {
+    const params = req.validated!.params as TaskParams;
+
+    await this.tasksService.deleteTask(params.id);
+
+    return HttpResponse.noContent(res);
+  };
+
+  getTaskById = async (req: Request, res: Response) => {
+    const params = req.validated!.params as TaskParams;
+
+    const result = await this.tasksService.getTaskById(params.id);
+
+    return HttpResponse.ok(res, result);
+  };
+
+  getTasks = async (req: Request, res: Response) => {
+    const query = req.validated!.query as TaskQuery;
+
+    const result = await this.tasksService.getTasks(query);
+
+    return HttpResponse.ok(res, result);
   };
 }
